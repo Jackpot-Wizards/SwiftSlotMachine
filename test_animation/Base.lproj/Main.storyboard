@@ -22,8 +22,16 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="slot_list_img" translatesAutoresizingMaskIntoConstraints="NO" id="9D4-rw-WgA">
-                                <rect key="frame" x="278" y="200" width="100" height="1000"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="slot_list_img" translatesAutoresizingMaskIntoConstraints="NO" id="9D4-rw-WgA" userLabel="slot1">
+                                <rect key="frame" x="100" y="200" width="100" height="1000"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="slot_list_img" translatesAutoresizingMaskIntoConstraints="NO" id="6Gg-6b-jXz" userLabel="slot2">
+                                <rect key="frame" x="205" y="200" width="100" height="1000"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="slot_list_img" translatesAutoresizingMaskIntoConstraints="NO" id="aPn-81-3CN" userLabel="slot3">
+                                <rect key="frame" x="310" y="200" width="100" height="1000"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ukS-XA-Oys">
@@ -42,6 +50,8 @@
                     </view>
                     <connections>
                         <outlet property="imgViewSlotItem1" destination="9D4-rw-WgA" id="6U9-j3-aBZ"/>
+                        <outlet property="imgViewSlotItem2" destination="6Gg-6b-jXz" id="stF-n2-T1m"/>
+                        <outlet property="imgViewSlotItem3" destination="aPn-81-3CN" id="G05-tH-bJ9"/>
                         <outlet property="textWithTimer" destination="yaW-of-DOY" id="Mny-Dr-vVK"/>
                     </connections>
                 </viewController>

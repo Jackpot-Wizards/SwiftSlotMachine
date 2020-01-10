@@ -13,12 +13,14 @@ class ViewController: UIViewController {
     @IBOutlet weak var textWithTimer: UILabel!
 
     @IBOutlet weak var imgViewSlotItem1: UIImageView!
+    @IBOutlet weak var imgViewSlotItem2: UIImageView!
+    @IBOutlet weak var imgViewSlotItem3: UIImageView!
     
     // Parameters for the movement of the reel
     let posStop : CGFloat = 300     // Position of the line
     let moveDist :CGFloat = 50      // Resolution of each movement : the bigger the faster movement.
     let spinSpeed : CGFloat = 0.03  // Duration of the each movement : the bigger the slower the movement.
-    let spinTime : Double = 2       // Time(sec.) to spin a reel before make the stop
+    let spinTime : Double = 1       // Time(sec.) to spin a reel before make the stop
     
     // Parameters for slot reel
     var reelWidth : CGFloat = 100   // Width of the reel
@@ -28,6 +30,7 @@ class ViewController: UIViewController {
     
     
     var stopSignal : [Bool] = [false, false, false]
+    var posItems : [CGFloat] = [0,0,0,0,0,0,0]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +50,12 @@ class ViewController: UIViewController {
         let posBell : CGFloat = reelStopPos - reelWidth * 1
         let posRemon : CGFloat = reelStopPos - reelWidth * 0
         
+        for idx in 0...6 {
+            posItems[idx] = reelStopPos - reelWidth * CGFloat(idx)
+        }
+
+        let rndIdx = Int.random(in: 1..<6)
+        let posRndEmpty = posItems[rndIdx] - reelWidth/2
         /*
          cherry : - reelWidth * 6
          diamond : - reelWidth * 5
@@ -58,10 +67,15 @@ class ViewController: UIViewController {
          */
         
         imgViewSlotItem1.frame.origin.x = 100
+        imgViewSlotItem2.frame.origin.x = 205
+        imgViewSlotItem3.frame.origin.x = 310
+        
         imgViewSlotItem1.frame.origin.y = reelStartPos
+        imgViewSlotItem2.frame.origin.y = reelStartPos
+        imgViewSlotItem3.frame.origin.y = reelStartPos
         
 //
-        runSpin(imgViewSlotItem1, spinSpeed, posCherry, 0)
+//        runSpin(imgViewSlotItem1, spinSpeed, posCherry, 0)
 //        runSpin(imgViewSlotItem1, spinSpeed, posDiamond)
 //        runSpin(imgViewSlotItem1, spinSpeed, posGrape)
 //        runSpin(imgViewSlotItem1, spinSpeed, posHart)
@@ -75,6 +89,10 @@ class ViewController: UIViewController {
 //        runSpin(imgViewSlotItem1, spinSpeed, posHart-reelWidth/2)
 //        runSpin(imgViewSlotItem1, spinSpeed, posBar-reelWidth/2)
 //        runSpin(imgViewSlotItem1, spinSpeed, posRemon-reelWidth/2)
+        
+        runSpin(imgViewSlotItem1, spinSpeed, posCherry, 0)
+        runSpin(imgViewSlotItem2, spinSpeed, posDiamond, 1)
+        runSpin(imgViewSlotItem3, spinSpeed, posRndEmpty, 2)
         
         textWithTimer.text = "first"
 
