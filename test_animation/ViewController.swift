@@ -18,8 +18,8 @@ class ViewController: UIViewController {
     
     // Parameters for the movement of the reel
     let posStop : CGFloat = 300     // Position of the line
-    let moveDist :CGFloat = 50      // Resolution of each movement : the bigger the faster movement.
-    let spinSpeed : CGFloat = 0.03  // Duration of the each movement : the bigger the slower the movement.
+    let moveDist :CGFloat = 25      // Resolution of each movement : the bigger the faster movement.
+    let spinSpeed : CGFloat = 0.01  // Duration of the each movement : the bigger the slower the movement.
     let spinTime : Double = 1       // Time(sec.) to spin a reel before make the stop
     
     // Parameters for slot reel
@@ -54,8 +54,7 @@ class ViewController: UIViewController {
             posItems[idx] = reelStopPos - reelWidth * CGFloat(idx)
         }
 
-        let rndIdx = Int.random(in: 1..<6)
-        let posRndEmpty = posItems[rndIdx] - reelWidth/2
+        var posRndEmpty = posItems[Int.random(in: 1..<6)] - reelWidth/2
         /*
          cherry : - reelWidth * 6
          diamond : - reelWidth * 5
@@ -83,6 +82,7 @@ class ViewController: UIViewController {
 //        runSpin(imgViewSlotItem1, spinSpeed, posRemon)
         
         
+        // Empty Items
 //        runSpin(imgViewSlotItem1, spinSpeed, posCherry-reelWidth/2)
 //        runSpin(imgViewSlotItem1, spinSpeed, posDiamond-reelWidth/2)
 //        runSpin(imgViewSlotItem1, spinSpeed, posGrape-reelWidth/2)
@@ -90,9 +90,14 @@ class ViewController: UIViewController {
 //        runSpin(imgViewSlotItem1, spinSpeed, posBar-reelWidth/2)
 //        runSpin(imgViewSlotItem1, spinSpeed, posRemon-reelWidth/2)
         
-        runSpin(imgViewSlotItem1, spinSpeed, posCherry, 0)
+        posRndEmpty = posItems[Int.random(in: 1..<6)] - reelWidth/2
+        runSpin(imgViewSlotItem1, spinSpeed, posRndEmpty, 0)
+        
+        posRndEmpty = posItems[Int.random(in: 1..<6)] - reelWidth/2
         runSpin(imgViewSlotItem2, spinSpeed, posDiamond, 1)
-        runSpin(imgViewSlotItem3, spinSpeed, posRndEmpty, 2)
+        
+        posRndEmpty = posItems[Int.random(in: 1..<6)] - reelWidth/2
+        runSpin(imgViewSlotItem3, spinSpeed, posRemon, 2)
         
         textWithTimer.text = "first"
 
@@ -111,12 +116,21 @@ class ViewController: UIViewController {
     
     
     func spinReel(_ imageView: UIImageView,_ speed:CGFloat, _ posStop:CGFloat, _ idxReel:Int) {
-        let speeds = speed
+        var speeds = speed
+        
+        // To slow it down
+        if ((imageView.frame.origin.y == posStop - self.moveDist*2)
+                 && (true == self.stopSignal[idxReel])){
+                 speeds = speed * 5
+             }
+        if ((imageView.frame.origin.y == posStop - self.moveDist)
+            && (true == self.stopSignal[idxReel])){
+            speeds = speed * 5
+        }
         
         UIView.animate(withDuration: TimeInterval(speeds), delay: 0.0, options:.curveLinear, animations: {
             imageView.frame.origin.y = imageView.frame.origin.y + self.moveDist
         }, completion: { (_) in
-            
             
             if (imageView.frame.origin.y == posStop) {
                 if ((true == self.stopSignal[idxReel])) {
